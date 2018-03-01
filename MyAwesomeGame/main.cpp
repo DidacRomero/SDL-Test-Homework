@@ -27,7 +27,7 @@ int main(int argc,char* argv[])
 			0								// flags 
 		);
 		//Set the Renderer
-		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		renderer = SDL_CreateRenderer(window, -1, 0);
 
 		int xspeed = 2, yspeed = 2;
 		
@@ -52,11 +52,13 @@ int main(int argc,char* argv[])
 			
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderFillRect(renderer,&redRect);
-			
+			//Update the 
 			SDL_RenderPresent(renderer);
-			//SDL_UpdateWindowSurface(window);
+			//Delay 5 milliseconds
 			SDL_Delay(5);
 		}
-
+		
+		SDL_DestroyRenderer(renderer);
+		SDL_DestroyWindow(window);
 	return 0;
 }
