@@ -46,7 +46,25 @@ int main(int argc,char* argv[])
 			//Set new position for the square
 			while (SDL_PollEvent(&checkEvents) != 0)
 			{
-				if (checkEvents.type == SDL_KEYDOWN)
+				if (checkEvents.type == SDL_KEYUP)
+				{
+					switch (checkEvents.key.keysym.sym)
+					{
+					case SDLK_LEFT:
+						xspeed = 0;
+						break;
+					case SDLK_RIGHT:
+						xspeed = 0;
+						break;
+					case SDLK_DOWN:
+						yspeed = 0;
+						break;
+					case SDLK_UP:
+						yspeed = 0;
+						break;
+					}
+				}
+				else if (checkEvents.type == SDL_KEYDOWN)
 				{
 					switch (checkEvents.key.keysym.sym) 
 					{
@@ -67,25 +85,10 @@ int main(int argc,char* argv[])
 						break;
 					case SDLK_SPACE:
 						renderShot = true;
+						greenRect.x = redRect.x+200;
+						greenRect.y = redRect.y + 50;
 						break;
 
-					}
-				}else if (checkEvents.type == SDL_KEYUP) 
-				{
-					switch (checkEvents.key.keysym.sym)
-					{
-					case SDLK_LEFT:
-						xspeed = 0;
-						break;
-					case SDLK_RIGHT:
-						xspeed = 0;
-						break;
-					case SDLK_DOWN:
-						yspeed = 0;
-						break;
-					case SDLK_UP:
-						yspeed = 0;
-						break;
 					}
 				}
 			}
@@ -105,11 +108,16 @@ int main(int argc,char* argv[])
 				SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 				SDL_RenderFillRect(renderer, &greenRect);
 				greenRect.x += shotSpeed;
+				if (greenRect.x > 1300)
+				{
+					renderShot = false;
+				}
+				
 			}
 			//Update the 
 			SDL_RenderPresent(renderer);
 			//Delay 5 milliseconds
-			SDL_Delay(5);
+			//SDL_Delay(5);
 		}
 		
 		SDL_DestroyRenderer(renderer);
