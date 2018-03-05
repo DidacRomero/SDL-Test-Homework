@@ -36,11 +36,31 @@ int main(int argc,char* argv[])
 		while (exitLoop!=true)
 		{
 			//Set new position for the square
-			if (SDL_PollEvent(&checkEvents)!=0)
+			while (SDL_PollEvent(&checkEvents)!=0)
 			{
 				if (checkEvents.type == SDL_KEYDOWN)
 				{
-					exitLoop = true;
+					switch (checkEvents.key.keysym.sym) {
+					case SDLK_ESCAPE:
+						exitLoop = true;
+						break;
+					case SDLK_LEFT:
+						xspeed = -1;
+						break;
+					case SDLK_RIGHT:
+						xspeed = 1;
+						break;
+					case SDLK_DOWN:
+						yspeed = 1;
+						break;
+					case SDLK_UP:
+						yspeed = -1;
+						break;
+					
+					}
+				}else {
+					xspeed = 0; 
+					yspeed = 0;
 				}
 			
 			}
