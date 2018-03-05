@@ -3,10 +3,6 @@
 #pragma comment(lib,"SDL/libx86/SDL2.lib")
 #pragma comment(lib,"SDL/libx86/SDL2main.lib")
 
-void createShot(int xplayer,int yplayer,int playerWidth,int playerHeight)
-{
-	
-}
 
 int main(int argc,char* argv[])
 {
@@ -44,6 +40,7 @@ int main(int argc,char* argv[])
 		int xspeed = 0, yspeed = 0;
 		bool exitLoop = false;
 		bool renderShot = false;
+
 		while (exitLoop!=true)
 		{
 			//Set new position for the square
