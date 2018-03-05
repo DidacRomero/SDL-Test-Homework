@@ -46,11 +46,10 @@ int main(int argc,char* argv[])
 			//Set new position for the square
 			while (SDL_PollEvent(&checkEvents) != 0)
 			{
-				xspeed = 0;
-				yspeed = 0;
 				if (checkEvents.type == SDL_KEYDOWN)
 				{
-					switch (checkEvents.key.keysym.sym) {
+					switch (checkEvents.key.keysym.sym) 
+					{
 					case SDLK_ESCAPE:
 						exitLoop = true;
 						break;
@@ -70,6 +69,23 @@ int main(int argc,char* argv[])
 						renderShot = true;
 						break;
 
+					}
+				}else if (checkEvents.type == SDL_KEYUP) 
+				{
+					switch (checkEvents.key.keysym.sym)
+					{
+					case SDLK_LEFT:
+						xspeed = 0;
+						break;
+					case SDLK_RIGHT:
+						xspeed = 0;
+						break;
+					case SDLK_DOWN:
+						yspeed = 0;
+						break;
+					case SDLK_UP:
+						yspeed = 0;
+						break;
 					}
 				}
 			}
