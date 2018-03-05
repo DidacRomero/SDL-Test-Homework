@@ -3,6 +3,11 @@
 #pragma comment(lib,"SDL/libx86/SDL2.lib")
 #pragma comment(lib,"SDL/libx86/SDL2main.lib")
 
+void createShot(int xplayer,int yplayer,int playerWidth,int playerHeight)
+{
+	
+}
+
 int main(int argc,char* argv[])
 {
 	SDL_Window *window=NULL;
@@ -18,6 +23,12 @@ int main(int argc,char* argv[])
 	redRect.w = 250;
 	redRect.h = 150;
 	
+	SDL_Rect greenRect;
+	greenRect.x = redRect.x + (250 / 2);
+	greenRect.y = redRect.y + (150 / 2);
+	greenRect.w = 100;
+	greenRect.h = 50;
+	
 	//Set the Window
 		window = SDL_CreateWindow(
 			"Best Game EVER!",                   // window title
@@ -32,7 +43,7 @@ int main(int argc,char* argv[])
 
 		int xspeed = 0, yspeed = 0;
 		bool exitLoop = false;
-	
+		bool renderShot = false;
 		while (exitLoop!=true)
 		{
 			//Set new position for the square
@@ -56,6 +67,9 @@ int main(int argc,char* argv[])
 					case SDLK_UP:
 						yspeed = -1;
 						break;
+					case SDLK_SPACE:
+						renderShot = true;
+						break;
 					
 					}
 				}else {
@@ -74,6 +88,12 @@ int main(int argc,char* argv[])
 			
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderFillRect(renderer,&redRect);
+
+			if (renderShot == true)
+			{
+				SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+				SDL_RenderFillRect(renderer, &greenRect);
+			}
 			//Update the 
 			SDL_RenderPresent(renderer);
 			//Delay 5 milliseconds
