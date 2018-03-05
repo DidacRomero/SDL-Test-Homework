@@ -37,7 +37,7 @@ int main(int argc,char* argv[])
 		//Set the Renderer
 		renderer = SDL_CreateRenderer(window, -1, 0);
 
-		int xspeed = 0, yspeed = 0;
+		int xspeed = 0, yspeed = 0, shotSpeed = 1;
 		bool exitLoop = false;
 		bool renderShot = false;
 
@@ -90,6 +90,7 @@ int main(int argc,char* argv[])
 			{
 				SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 				SDL_RenderFillRect(renderer, &greenRect);
+				greenRect.x += shotSpeed;
 			}
 			//Update the 
 			SDL_RenderPresent(renderer);
