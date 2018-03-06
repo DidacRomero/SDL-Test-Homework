@@ -6,8 +6,8 @@
 
 int main(int argc,char* argv[])
 {
-	SDL_Window *window=NULL;
-	SDL_Renderer* renderer=NULL;
+	SDL_Window* window=nullptr;
+	SDL_Renderer* renderer=nullptr;
 	SDL_Event checkEvents;
 
 	SDL_Init(SDL_INIT_VIDEO);
@@ -122,9 +122,9 @@ int main(int argc,char* argv[])
 		}
 		
 		SDL_DestroyRenderer(renderer);
-		renderer = NULL;
+		renderer = nullptr;
 		SDL_DestroyWindow(window);
-		window = NULL;
+		window = nullptr;
 	return 0;
 	}
 
