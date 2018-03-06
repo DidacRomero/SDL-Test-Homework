@@ -19,12 +19,8 @@ int main(int argc,char* argv[])
 	redRect.w = 250;
 	redRect.h = 150;
 	
-	SDL_Rect greenRect;
-	greenRect.x = redRect.x + (250 / 2);
-	greenRect.y = redRect.y + (150 / 2);
-	greenRect.w = 100;
-	greenRect.h = 50;
-	
+	SDL_Rect greenRect[20];
+
 	//Set the Window
 		window = SDL_CreateWindow(
 			"Best Game EVER!",                   // window title
@@ -38,12 +34,14 @@ int main(int argc,char* argv[])
 		renderer = SDL_CreateRenderer(window, -1, 0);
 
 		int xspeed = 1, yspeed = 1, shotSpeed = 1;
+		int bulletArrPos = 0;
 		bool exitLoop = false;
 		bool renderShot = false;
 		bool leftPressed = false, rightPressed = false, upPressed = false, downPressed = false;
 
 		while (exitLoop!=true)
 		{
+
 			//Set the inputs into the KetPressed variables
 			while (SDL_PollEvent(&checkEvents) != 0)
 			{
@@ -87,8 +85,8 @@ int main(int argc,char* argv[])
 						//Shoot a green laser
 					case SDLK_SPACE:
 						renderShot = true;
-						greenRect.x = redRect.x+200;
-						greenRect.y = redRect.y + 50;
+						greenRect[bulletArrPos].x = redRect.x+200;
+						greenRect[bulletArrPos].y = redRect.y + 50;
 						break;
 
 					}
@@ -127,9 +125,9 @@ int main(int argc,char* argv[])
 			if (renderShot == true)
 			{
 				SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-				SDL_RenderFillRect(renderer, &greenRect);
-				greenRect.x += shotSpeed;
-				if (greenRect.x > 1300)
+				SDL_RenderFillRect(renderer, greenRect);
+				greenRect[bulletArrPos].x += shotSpeed;
+				if (greenRect[bulletArrPos].x > 1300)
 				{
 					renderShot = false;
 				}
