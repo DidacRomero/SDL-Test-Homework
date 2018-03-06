@@ -83,6 +83,7 @@ int main(int argc,char* argv[])
 					case SDLK_UP:
 						yspeed = -1;
 						break;
+						//Shoot a green laser
 					case SDLK_SPACE:
 						renderShot = true;
 						greenRect.x = redRect.x+200;
@@ -92,14 +93,14 @@ int main(int argc,char* argv[])
 					}
 				}
 			}
-
+			//Sum the determined velocity to the player's character 
 			redRect.x += xspeed;
 			redRect.y += yspeed;
 
 			SDL_SetRenderDrawColor(renderer, 65, 105, 255, 255);
 			SDL_RenderClear(renderer);
-			//SET the Draw color for the rectangle
 			
+			//SET the Draw color for the rectangle
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderFillRect(renderer,&redRect);
 
@@ -114,7 +115,7 @@ int main(int argc,char* argv[])
 				}
 				
 			}
-			//Update the 
+			//Update the Render
 			SDL_RenderPresent(renderer);
 			//Delay 5 milliseconds
 			//SDL_Delay(5);
