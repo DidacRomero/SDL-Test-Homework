@@ -37,14 +37,14 @@ int main(int argc,char* argv[])
 		//Set the Renderer
 		renderer = SDL_CreateRenderer(window, -1, 0);
 
-		int xspeed = 0, yspeed = 0,topSpeed=1, shotSpeed = 1;
+		int xspeed = 1, yspeed = 1, shotSpeed = 1;
 		bool exitLoop = false;
 		bool renderShot = false;
 		bool leftPressed = false, rightPressed = false, upPressed = false, downPressed = false;
 
 		while (exitLoop!=true)
 		{
-			//Set new position for the square
+			//Set the inputs into the KetPressed variables
 			while (SDL_PollEvent(&checkEvents) != 0)
 			{
 				if (checkEvents.type == SDL_KEYUP)
@@ -52,20 +52,20 @@ int main(int argc,char* argv[])
 					switch (checkEvents.key.keysym.sym)
 					{
 					case SDLK_LEFT:
-						xspeed = 0;
+						leftPressed = false;
 						break;
 					case SDLK_RIGHT:
-						xspeed = 0;
+						rightPressed = false;
 						break;
 					case SDLK_DOWN:
-						yspeed = 0;
+						downPressed = false;
 						break;
 					case SDLK_UP:
-						yspeed = 0;
+						upPressed = false;
 						break;
 					}
 				}
-				else if (checkEvents.type == SDL_KEYDOWN)
+				if (checkEvents.type == SDL_KEYDOWN)
 				{
 					switch (checkEvents.key.keysym.sym) 
 					{
@@ -73,16 +73,16 @@ int main(int argc,char* argv[])
 						exitLoop = true;
 						break;
 					case SDLK_LEFT:
-						xspeed += -1;
+						leftPressed = true;
 						break;
 					case SDLK_RIGHT:
-						xspeed += 1;
+						rightPressed = true;
 						break;
 					case SDLK_DOWN:
-						yspeed += 1;
+						downPressed = true;
 						break;
 					case SDLK_UP:
-						yspeed += -1;
+						upPressed = true;
 						break;
 						//Shoot a green laser
 					case SDLK_SPACE:
@@ -94,26 +94,28 @@ int main(int argc,char* argv[])
 					}
 				}
 			}
-			/*
-			if (xspeed > topSpeed)
+
+			// Using the KeyPressed variables to change speed, thus position
+			if (leftPressed == true)
 			{
-				xspeed = topSpeed;
-			}else if (xspeed < topSpeed*-1)
-			{
-				xspeed = -topSpeed;
+				redRect.x -= xspeed;
 			}
-			else if (yspeed < topSpeed*-1)
+			 if (rightPressed == true)
 			{
-				yspeed = -topSpeed;
+				redRect.x += xspeed;
 			}
-			else if (yspeed < topSpeed)
+			if (upPressed == true)
 			{
-				yspeed = topSpeed;
+				redRect.y-= xspeed;
 			}
-			*/
+			if (downPressed == true)
+			{
+				redRect.y += xspeed;
+			}
+			
 			//Sum the determined velocity to the player's character 
-			redRect.x += xspeed;
-			redRect.y += yspeed;
+			//redRect.x += xspeed;
+			//redRect.y += yspeed;
 
 			SDL_SetRenderDrawColor(renderer, 65, 105, 255, 255);
 			SDL_RenderClear(renderer);
