@@ -37,9 +37,10 @@ int main(int argc,char* argv[])
 		//Set the Renderer
 		renderer = SDL_CreateRenderer(window, -1, 0);
 
-		int xspeed = 0, yspeed = 0, shotSpeed = 1;
+		int xspeed = 0, yspeed = 0,topSpeed=1, shotSpeed = 1;
 		bool exitLoop = false;
 		bool renderShot = false;
+		bool leftPressed = false, rightPressed = false, upPressed = false, downPressed = false;
 
 		while (exitLoop!=true)
 		{
@@ -72,16 +73,16 @@ int main(int argc,char* argv[])
 						exitLoop = true;
 						break;
 					case SDLK_LEFT:
-						xspeed = -1;
+						xspeed += -1;
 						break;
 					case SDLK_RIGHT:
-						xspeed = 1;
+						xspeed += 1;
 						break;
 					case SDLK_DOWN:
-						yspeed = 1;
+						yspeed += 1;
 						break;
 					case SDLK_UP:
-						yspeed = -1;
+						yspeed += -1;
 						break;
 						//Shoot a green laser
 					case SDLK_SPACE:
@@ -93,6 +94,23 @@ int main(int argc,char* argv[])
 					}
 				}
 			}
+			/*
+			if (xspeed > topSpeed)
+			{
+				xspeed = topSpeed;
+			}else if (xspeed < topSpeed*-1)
+			{
+				xspeed = -topSpeed;
+			}
+			else if (yspeed < topSpeed*-1)
+			{
+				yspeed = -topSpeed;
+			}
+			else if (yspeed < topSpeed)
+			{
+				yspeed = topSpeed;
+			}
+			*/
 			//Sum the determined velocity to the player's character 
 			redRect.x += xspeed;
 			redRect.y += yspeed;
