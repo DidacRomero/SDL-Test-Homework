@@ -1,7 +1,10 @@
 #include "SDL/include/SDL.h"
+#include "SDL/include/SDL_image.h"
+
 
 #pragma comment(lib,"SDL/libx86/SDL2.lib")
 #pragma comment(lib,"SDL/libx86/SDL2main.lib")
+#pragma comment(lib,"SDL_Image/libx86/SDL2_image.lib")
 
 int main(int argc,char* argv[])
 {
@@ -41,7 +44,7 @@ int main(int argc,char* argv[])
 		while (exitLoop!=true)
 		{
 
-			//Set the inputs into the KetPressed variables
+			//Set the inputs into the KeyPressed variables
 			while (SDL_PollEvent(&checkEvents) != 0)
 			{
 				if (checkEvents.type == SDL_KEYUP)
