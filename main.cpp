@@ -3,6 +3,17 @@
 #pragma comment(lib,"SDL/libx86/SDL2.lib")
 #pragma comment(lib,"SDL/libx86/SDL2main.lib")
 
+void UpdateBullets(int bulletNum,int *bulletXPos,int bulletSpeed)
+{
+	/*
+	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+	for (int i = 0; i <= bulletNum; ++i)
+	{
+		bulletXPos += bulletSpeed;
+		SDL_RenderFillRect(renderer, &greenRect[bulletArrPos]);
+	}
+	*/
+}
 
 int main(int argc,char* argv[])
 {
@@ -19,7 +30,7 @@ int main(int argc,char* argv[])
 	redRect.w = 250;
 	redRect.h = 150;
 	
-	SDL_Rect greenRect[20];
+	SDL_Rect greenRect[1000];
 
 	//Set the Window
 		window = SDL_CreateWindow(
@@ -33,7 +44,7 @@ int main(int argc,char* argv[])
 		//Set the Renderer
 		renderer = SDL_CreateRenderer(window, -1, 0);
 
-		int xspeed = 1, yspeed = 1, shotSpeed = 1;
+		int xspeed = 1, yspeed = 1, bulletSpeed = 1;
 		int bulletArrPos = 0;
 		bool exitLoop = false;
 		bool renderShot = false;
@@ -87,6 +98,7 @@ int main(int argc,char* argv[])
 						renderShot = true;
 						greenRect[bulletArrPos].x = redRect.x+200;
 						greenRect[bulletArrPos].y = redRect.y + 50;
+						bulletArrPos++;
 						break;
 
 					}
@@ -122,6 +134,7 @@ int main(int argc,char* argv[])
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderFillRect(renderer,&redRect);
 
+			/*
 			if (renderShot == true)
 			{
 				SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
@@ -134,6 +147,18 @@ int main(int argc,char* argv[])
 					renderShot = false;
 				}
 				*/
+			//}
+		
+
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			//Update the bullets status
+			for (int i = 0; i <= bulletArrPos; ++i)
+			{
+				greenRect[i].x += bulletSpeed;
+				greenRect[i].w = 100;
+				greenRect[i].h = 25;
+				greenRect[i].x += bulletSpeed;
+				SDL_RenderFillRect(renderer, &greenRect[i]);
 			}
 			//Update the Render
 			SDL_RenderPresent(renderer);
