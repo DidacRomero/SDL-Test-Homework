@@ -134,24 +134,9 @@ int main(int argc,char* argv[])
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderFillRect(renderer,&redRect);
 
-			/*
-			if (renderShot == true)
-			{
-				SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-				SDL_RenderFillRect(renderer, &greenRect[bulletArrPos]);
-				greenRect[bulletArrPos].x += shotSpeed;
-				greenRect[bulletArrPos].w = 100;
-				greenRect[bulletArrPos].h = 25;
-				/*if (greenRect[bulletArrPos].x > 1300)
-				{
-					renderShot = false;
-				}
-				*/
-			//}
-		
-
-			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			
 			//Update the bullets status
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 			for (int i = 0; i <= bulletArrPos; ++i)
 			{
 				greenRect[i].x += bulletSpeed;
@@ -159,6 +144,10 @@ int main(int argc,char* argv[])
 				greenRect[i].h = 25;
 				greenRect[i].x += bulletSpeed;
 				SDL_RenderFillRect(renderer, &greenRect[i]);
+				if (greenRect[i].x < 1300)
+				{
+					SDL_RenderFillRect(renderer, &greenRect[i]);
+				}
 			}
 			//Update the Render
 			SDL_RenderPresent(renderer);
