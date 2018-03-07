@@ -3,18 +3,6 @@
 #pragma comment(lib,"SDL/libx86/SDL2.lib")
 #pragma comment(lib,"SDL/libx86/SDL2main.lib")
 
-void UpdateBullets(int bulletNum,int *bulletXPos,int bulletSpeed)
-{
-	/*
-	SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-	for (int i = 0; i <= bulletNum; ++i)
-	{
-		bulletXPos += bulletSpeed;
-		SDL_RenderFillRect(renderer, &greenRect[bulletArrPos]);
-	}
-	*/
-}
-
 int main(int argc,char* argv[])
 {
 	SDL_Window* window=nullptr;
@@ -95,7 +83,6 @@ int main(int argc,char* argv[])
 						break;
 						//Shoot a green laser
 					case SDLK_SPACE:
-						renderShot = true;
 						greenRect[bulletArrPos].x = redRect.x+200;
 						greenRect[bulletArrPos].y = redRect.y + 50;
 						bulletArrPos++;
@@ -123,10 +110,6 @@ int main(int argc,char* argv[])
 				redRect.y += xspeed;
 			}
 			
-			//Sum the determined velocity to the player's character 
-			//redRect.x += xspeed;
-			//redRect.y += yspeed;
-
 			SDL_SetRenderDrawColor(renderer, 65, 105, 255, 255);
 			SDL_RenderClear(renderer);
 			
@@ -139,7 +122,6 @@ int main(int argc,char* argv[])
 			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 			for (int i = 0; i <= bulletArrPos; ++i)
 			{
-				greenRect[i].x += bulletSpeed;
 				greenRect[i].w = 100;
 				greenRect[i].h = 25;
 				greenRect[i].x += bulletSpeed;
