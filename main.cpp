@@ -44,69 +44,72 @@ int main(int argc, char* argv[])
 
 	//Set the PNG Background
 	SDL_Texture *back= nullptr;
+	SDL_Texture *ShipTexture = nullptr;
 	SDL_Surface *Background = IMG_Load("background.png");
+	SDL_Surface *Ship = IMG_Load("ae86.png");
 	back = SDL_CreateTextureFromSurface(renderer,Background);
-	if (back==nullptr)
+	ShipTexture = SDL_CreateTextureFromSurface(renderer,Ship);
+	if (back==nullptr || ShipTexture==nullptr)
 	{
 		return -1;
 	}
 	else
-	{}
-	
-	
-	while (exitLoop != true)
 	{
 
-		//Set the inputs into the KeyPressed variables
-		while (SDL_PollEvent(&checkEvents) != 0)
-		{
-			if (checkEvents.type == SDL_KEYUP)
-			{
-				switch (checkEvents.key.keysym.sym)
-				{
-				case SDLK_LEFT:
-					leftPressed = false;
-					break;
-				case SDLK_RIGHT:
-					rightPressed = false;
-					break;
-				case SDLK_DOWN:
-					downPressed = false;
-					break;
-				case SDLK_UP:
-					upPressed = false;
-					break;
-				}
-			}
-			if (checkEvents.type == SDL_KEYDOWN)
-			{
-				switch (checkEvents.key.keysym.sym)
-				{
-				case SDLK_ESCAPE:
-					exitLoop = true;
-					break;
-				case SDLK_LEFT:
-					leftPressed = true;
-					break;
-				case SDLK_RIGHT:
-					rightPressed = true;
-					break;
-				case SDLK_DOWN:
-					downPressed = true;
-					break;
-				case SDLK_UP:
-					upPressed = true;
-					break;
-					//Shoot a green laser
-				case SDLK_SPACE:
-					greenRect[bulletArrPos].x = redRect.x + 200;
-					greenRect[bulletArrPos].y = redRect.y + 50;
-					bulletArrPos++;
-					break;
 
+		while (exitLoop != true)
+		{
+
+			//Set the inputs into the KeyPressed variables
+			while (SDL_PollEvent(&checkEvents) != 0)
+			{
+				if (checkEvents.type == SDL_KEYUP)
+				{
+					switch (checkEvents.key.keysym.sym)
+					{
+					case SDLK_LEFT:
+						leftPressed = false;
+						break;
+					case SDLK_RIGHT:
+						rightPressed = false;
+						break;
+					case SDLK_DOWN:
+						downPressed = false;
+						break;
+					case SDLK_UP:
+						upPressed = false;
+						break;
+					}
+				}
+				if (checkEvents.type == SDL_KEYDOWN)
+				{
+					switch (checkEvents.key.keysym.sym)
+					{
+					case SDLK_ESCAPE:
+						exitLoop = true;
+						break;
+					case SDLK_LEFT:
+						leftPressed = true;
+						break;
+					case SDLK_RIGHT:
+						rightPressed = true;
+						break;
+					case SDLK_DOWN:
+						downPressed = true;
+						break;
+					case SDLK_UP:
+						upPressed = true;
+						break;
+						//Shoot a green laser
+					case SDLK_SPACE:
+						greenRect[bulletArrPos].x = redRect.x + 200;
+						greenRect[bulletArrPos].y = redRect.y + 50;
+						bulletArrPos++;
+						break;
+
+					}
 				}
 			}
-		}
 
 			// Using the KeyPressed variables to change speed, thus position
 			if (leftPressed == true)
@@ -128,8 +131,8 @@ int main(int argc, char* argv[])
 
 			//SDL_SetRenderDrawColor(renderer, 65, 105, 255, 255);
 			SDL_RenderClear(renderer);
-			SDL_RenderCopy(renderer,back,NULL,NULL);
-			
+			SDL_RenderCopy(renderer, back, NULL, NULL);
+
 
 
 			//SET the Draw color for the rectangle
@@ -155,7 +158,7 @@ int main(int argc, char* argv[])
 			//Delay 5 milliseconds
 			//SDL_Delay(5);
 		}
-	
+
 
 		SDL_DestroyRenderer(renderer);
 		renderer = nullptr;
@@ -163,8 +166,9 @@ int main(int argc, char* argv[])
 		window = nullptr;
 		SDL_FreeSurface(Background);
 		IMG_Quit();
-	return 0;
+		return 0;
 	}
+}
 
 
 
