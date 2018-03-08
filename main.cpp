@@ -43,15 +43,16 @@ int main(int argc, char* argv[])
 	bool leftPressed = false, rightPressed = false, upPressed = false, downPressed = false;
 
 	//Set the PNG Background
-	//SDL_Texture *back= nullptr;
-	//SDL_Surface *Background = IMG_Load("background.png");
-	/*if (back==nullptr)
+	SDL_Texture *back= nullptr;
+	SDL_Surface *Background = IMG_Load("background.png");
+	back = SDL_CreateTextureFromSurface(renderer,Background);
+	if (back==nullptr)
 	{
-		//Error Loading the PNG
+		return -1;
 	}
 	else
 	{}
-	*/
+	
 	
 	while (exitLoop != true)
 	{
@@ -125,15 +126,18 @@ int main(int argc, char* argv[])
 				redRect.y += xspeed;
 			}
 
-			SDL_SetRenderDrawColor(renderer, 65, 105, 255, 255);
+			//SDL_SetRenderDrawColor(renderer, 65, 105, 255, 255);
 			SDL_RenderClear(renderer);
+			SDL_RenderCopy(renderer,back,NULL,NULL);
+			
+
 
 			//SET the Draw color for the rectangle
 			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderFillRect(renderer, &redRect);
 
 
-			//Update the bullets status
+			//Update the bullets status and render
 			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
 			for (int i = 0; i <= bulletArrPos; ++i)
 			{
@@ -157,7 +161,7 @@ int main(int argc, char* argv[])
 		renderer = nullptr;
 		SDL_DestroyWindow(window);
 		window = nullptr;
-		//SDL_FreeSurface(Background);
+		SDL_FreeSurface(Background);
 		IMG_Quit();
 	return 0;
 	}
