@@ -45,10 +45,13 @@ int main(int argc, char* argv[])
 	//Set the PNG Background
 	SDL_Texture *back= nullptr;
 	SDL_Texture *ShipTexture = nullptr;
+	SDL_Texture *laserTexture = nullptr;
 	SDL_Surface *Background = IMG_Load("background.png");
 	SDL_Surface *Ship = IMG_Load("ae86.png");
+	SDL_Surface *Laser = IMG_Load("laser.png");
 	back = SDL_CreateTextureFromSurface(renderer,Background);
 	ShipTexture = SDL_CreateTextureFromSurface(renderer,Ship);
+	laserTexture = SDL_CreateTextureFromSurface(renderer, Laser);
 	if (back==nullptr || ShipTexture==nullptr)
 	{
 		return -1;
@@ -147,10 +150,10 @@ int main(int argc, char* argv[])
 				greenRect[i].w = 100;
 				greenRect[i].h = 25;
 				greenRect[i].x += bulletSpeed;
-				SDL_RenderFillRect(renderer, &greenRect[i]);
+				//SDL_RenderFillRect(renderer, &greenRect[i]);
 				if (greenRect[i].x < 1300)
 				{
-					SDL_RenderFillRect(renderer, &greenRect[i]);
+					SDL_RenderCopy(renderer, laserTexture, NULL, &greenRect[i]);
 				}
 			}
 			//Update the Render
