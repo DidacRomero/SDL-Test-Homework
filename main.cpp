@@ -56,7 +56,6 @@ int main(int argc, char* argv[])
 	else
 	{
 
-
 		while (exitLoop != true)
 		{
 
@@ -136,8 +135,9 @@ int main(int argc, char* argv[])
 
 
 			//SET the Draw color for the rectangle
-			SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-			SDL_RenderFillRect(renderer, &redRect);
+			//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+			SDL_RenderCopy(renderer,ShipTexture, NULL, &redRect);
+		//	SDL_RenderFillRect(renderer, &redRect);
 
 
 			//Update the bullets status and render
