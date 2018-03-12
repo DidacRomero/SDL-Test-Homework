@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 	int bulletArrPos = 0;
 	bool exitLoop = false;
 	bool renderShot = false;
-	bool leftPressed = false, rightPressed = false, upPressed = false, downPressed = false;
+	bool leftPressed = false, rightPressed = false, upPressed = false, downPressed = false, spacePressed = false;
 
 	//Set the PNG Background
 	SDL_Texture *back= nullptr;
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 	back = SDL_CreateTextureFromSurface(renderer,Background);
 	ShipTexture = SDL_CreateTextureFromSurface(renderer,Ship);
 	laserTexture = SDL_CreateTextureFromSurface(renderer, Laser);
-	if (back==nullptr || ShipTexture==nullptr)
+	if (back==nullptr || ShipTexture==nullptr|| Laser==nullptr)
 	{
 		return -1;
 	}
@@ -107,9 +107,7 @@ int main(int argc, char* argv[])
 						break;
 						//Shoot a green laser
 					case SDLK_SPACE:
-						greenRect[bulletArrPos].x = redRect.x + 200;
-						greenRect[bulletArrPos].y = redRect.y + 50;
-						bulletArrPos++;
+						spacePressed = true;
 						break;
 
 					}
@@ -132,6 +130,13 @@ int main(int argc, char* argv[])
 			if (downPressed == true)
 			{
 				redRect.y += xspeed;
+			}
+			if (spacePressed == true)
+			{
+				greenRect[bulletArrPos].x = redRect.x + 200;
+				greenRect[bulletArrPos].y = redRect.y + 50;
+				bulletArrPos++;
+				spacePressed = false;
 			}
 
 			//SDL_SetRenderDrawColor(renderer, 65, 105, 255, 255);
