@@ -62,6 +62,10 @@ int main(int argc, char* argv[])
 	Mix_VolumeMusic(56);
 	Mix_PlayMusic(bgm,-1);
 
+	//Initialize wav sounds
+	Mix_Chunk *shot = nullptr;
+	shot = Mix_LoadWAV("spshot.wav");
+
 	if (back==nullptr || ShipTexture==nullptr|| Laser==nullptr)
 	{
 		return -1;
@@ -142,6 +146,7 @@ int main(int argc, char* argv[])
 				greenRect[bulletArrPos].x = redRect.x + 200;
 				greenRect[bulletArrPos].y = redRect.y + 50;
 				bulletArrPos++;
+				Mix_PlayChannel(2, shot, 0);
 				spacePressed = false;
 			}
 
