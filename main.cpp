@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 	Mix_Music *bgm=nullptr;
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 	bgm = Mix_LoadMUS("bgmusic.ogg");
-	Mix_VolumeMusic(56);
+	Mix_VolumeMusic(100);
 	Mix_PlayMusic(bgm,-1);
 
 	//Initialize wav sounds
@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 			if (spacePressed == true)
 			{
 				greenRect[bulletArrPos].x = redRect.x + 200;
-				greenRect[bulletArrPos].y = redRect.y + 50;
+				greenRect[bulletArrPos].y = redRect.y + 70;
 				bulletArrPos++;
 				Mix_PlayChannel(2, shot, 0);
 				spacePressed = false;
