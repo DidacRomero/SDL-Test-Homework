@@ -1,10 +1,12 @@
 #include "SDL/include/SDL.h"
 #include "SDL_Image/include/SDL_image.h"
-
+#include "SDL_Mixer/include/SDL_mixer.h"
 
 #pragma comment(lib,"SDL/libx86/SDL2.lib")
 #pragma comment(lib,"SDL/libx86/SDL2main.lib")
 #pragma comment(lib,"SDL_Image/libx86/SDL2_image.lib")
+#pragma comment(lib,"SDL_Mixer/libx86/SDL2_mixer.lib")
+
 
 int main(int argc, char* argv[])
 {
@@ -13,8 +15,9 @@ int main(int argc, char* argv[])
 	SDL_Event checkEvents;
 
 	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_AUDIO);
 	IMG_Init(IMG_INIT_PNG);
-
+	Mix_Init(MIX_INIT_OGG);
 	//Declare the Red Rectangle Dimensions and Position
 	SDL_Rect redRect;
 	redRect.x = 1280 / 4;
@@ -162,13 +165,27 @@ int main(int argc, char* argv[])
 			//SDL_Delay(5);
 		}
 
+		SDL_DestroyTexture(back);
+		SDL_DestroyTexture(ShipTexture);
+		SDL_DestroyTexture(laserTexture);
+
+		SDL_FreeSurface(Background);
+		SDL_FreeSurface(Ship);
+		SDL_FreeSurface(Laser);
 
 		SDL_DestroyRenderer(renderer);
-		renderer = nullptr;
 		SDL_DestroyWindow(window);
+
+		renderer = nullptr;
 		window = nullptr;
-		SDL_FreeSurface(Background);
+		back = nullptr;
+		ShipTexture = nullptr;
+		laserTexture = nullptr;
+		 
+	
 		IMG_Quit();
+		Mix_Quit();
+		
 		return 0;
 	}
 }
