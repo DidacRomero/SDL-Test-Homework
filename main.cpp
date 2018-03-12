@@ -7,7 +7,6 @@
 #pragma comment(lib,"SDL_Image/libx86/SDL2_image.lib")
 #pragma comment(lib,"SDL_Mixer/libx86/SDL2_mixer.lib")
 
-
 int main(int argc, char* argv[])
 {
 	SDL_Window* window = nullptr;
@@ -39,7 +38,7 @@ int main(int argc, char* argv[])
 	//Set the Renderer
 	renderer = SDL_CreateRenderer(window, -1, 0);
 
-	int xspeed = 1, yspeed = 1, bulletSpeed = 1;
+	int xspeed = 1, yspeed = 1, bulletSpeed = 2;
 	int bulletArrPos = 0;
 	bool exitLoop = false;
 	bool renderShot = false;
@@ -58,7 +57,10 @@ int main(int argc, char* argv[])
 
 	//Initialize music sounds
 	Mix_Music *bgm=nullptr;
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 	bgm = Mix_LoadMUS("bgmusic.ogg");
+	Mix_VolumeMusic(56);
+	Mix_PlayMusic(bgm,-1);
 
 	if (back==nullptr || ShipTexture==nullptr|| Laser==nullptr)
 	{
