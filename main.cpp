@@ -55,13 +55,17 @@ int main(int argc, char* argv[])
 	back = SDL_CreateTextureFromSurface(renderer,Background);
 	ShipTexture = SDL_CreateTextureFromSurface(renderer,Ship);
 	laserTexture = SDL_CreateTextureFromSurface(renderer, Laser);
+
+	//Initialize music sounds
+	Mix_Music *bgm=nullptr;
+	bgm = Mix_LoadMUS("bgmusic.ogg");
+
 	if (back==nullptr || ShipTexture==nullptr|| Laser==nullptr)
 	{
 		return -1;
 	}
 	else
 	{
-
 		while (exitLoop != true)
 		{
 
@@ -148,7 +152,7 @@ int main(int argc, char* argv[])
 			//SET the Draw color for the rectangle
 			//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 			SDL_RenderCopy(renderer,ShipTexture, NULL, &redRect);
-		//	SDL_RenderFillRect(renderer, &redRect);
+		    //SDL_RenderFillRect(renderer, &redRect);
 
 
 			//Update the bullets status and render
@@ -180,6 +184,8 @@ int main(int argc, char* argv[])
 
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
+
+		Mix_FreeMusic(bgm);
 
 		renderer = nullptr;
 		window = nullptr;
